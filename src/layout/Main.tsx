@@ -6,17 +6,23 @@
 
  **********************/
 
-import { Container } from '@chakra-ui/react'
-import React from 'react'
+import { Container } from "@chakra-ui/react";
+import React from "react";
 
 interface Props {
-    children: React.ReactNode
-  }
+  children: React.ReactNode;
+}
 
 const Main = (props: Props) => {
   return (
-    <Container maxW="container.md" pt={14}>{props.children}</Container>
-  )
-}
+    <Container
+      mt={{ base: "10px", sm: "40px" }}
+      maxW="container.md"
+      pt={14}
+    >
+      {props.children}
+    </Container>
+  );
+};
 
-export default Main
+export default Main;
