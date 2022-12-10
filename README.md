@@ -5,7 +5,7 @@ Task List (React + Redux Toolkit + ChakraUI)
 
 👉  **Try it out: [Nested Task List (Live Demo)](https://fawkes11.github.io/task-manager/)**  👈
 
-Project created by [Hessler Inampuez](https://github.com/fawkes11). See his other projects at his [github](https://hessler.tech) page.
+Project created by [Hessler Inampuez](https://github.com/fawkes11). See his other projects at his [personal portfolio](https://hessler.tech).
 
 # Install / Run in dev mode
 
