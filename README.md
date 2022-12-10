@@ -3,9 +3,9 @@ Task List (React + Redux Toolkit + ChakraUI)
 
 **Task List** is a [React](https://es.reactjs.org/) - based task list (or "todo list") prototype written in TypeScript built with [Redux Toolkit](https://redux-toolkit.js.org/) using the [Chakra-UI](https://chakra-ui.com/) React component library.
 
-👉  **Try it out: [Nested Task List (Live Demo)](https://fawkes11.github.io/task-manager/)**  👈
+👉  **Try it out: [Task List (Live Demo)](https://fawkes11.github.io/task-manager/)**  👈
 
-Project created by [Hessler Inampuez](https://github.com/fawkes11). See his other projects at his [personal portfolio](https://hessler.tech).
+Project created by [Hessler Inampuez](https://github.com/fawkes11). See his other projects at his [Personal Portfolio](https://hessler.tech).
 
 # Install / Run in dev mode
 
