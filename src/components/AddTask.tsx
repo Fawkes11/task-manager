@@ -54,7 +54,6 @@ const AddTask = () => {
   function calcIndent(): number {
     if(task.mainId !== 'NONE'){
       const mainTaskIndent = tasksList.find(t => t.id === task.mainId)?.indent
-      console.log(mainTaskIndent)
       return mainTaskIndent ? mainTaskIndent + 12 : 1;
   }
   return 1
