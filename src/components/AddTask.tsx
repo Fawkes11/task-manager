@@ -57,7 +57,7 @@ const AddTask = () => {
       console.log(mainTaskIndent)
       return mainTaskIndent ? mainTaskIndent + 12 : 1;
   }
-  return 0
+  return 1
 }
 /**************************************************/
 

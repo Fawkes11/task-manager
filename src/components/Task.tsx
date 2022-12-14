@@ -77,7 +77,7 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
 
 
   return (
-    <Stack direction="row" w="full" ml={`${indent}px`}>
+    <Stack direction="row" ml={`${indent}px`}>
       <Box display="flex" alignItems="center">
         <Tag
           variant="solid"
@@ -98,7 +98,7 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
         px={3}
         flex="1"
         textAlign="left"
-        minWidth={{ base: "250px", md: "500px" }}
+        minWidth={{ base: "250px", md: "450px" }}
         borderBottom="1px BlackAlpha.400"
         display="flex"
         alignItems="center"
