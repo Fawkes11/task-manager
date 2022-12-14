@@ -64,7 +64,7 @@ const TaskList = () => {
 
       {/* Here the tasks will be listed with or without filters. */}
       <Box
-        overflow="scroll"
+        overflow="auto"
         border="1px"
         borderColor="gray.200"
         borderRadius={7}
