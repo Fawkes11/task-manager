@@ -154,7 +154,7 @@ const Task = ({
       </Checkbox>
 
       <Box display="flex" alignItems="center" maxW="40px">
-        <IconButton
+        {/* <IconButton
           onClick={handleDelete}
           aria-label="Delete task"
           colorScheme="none"
@@ -162,7 +162,7 @@ const Task = ({
             transform: "scale(1.15)",
           }}
           icon={<EditIcon color="green.500" />}
-        />
+        /> */}
         <IconButton
           onClick={handleDelete}
           aria-label="Delete task"
