@@ -14,40 +14,77 @@ import {
   Box,
   Heading,
 } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { deleteTask, updateTask } from "../features/tasks/taskSlice";
 import { Task as TaskInterface } from "../interfaces/interfaces";
+import { useEffect } from "react";
 
-const Task = ({ id, name, description, status, indent }: TaskInterface) => {
+const Task = ({
+  id,
+  name,
+  description,
+  status,
+  indent,
+  mainId,
+}: TaskInterface) => {
   const dispatch = useAppDispatch();
   const dataList = useAppSelector((state) => state.tasks);
 
   /* this function checks if you have unchecked dependent tasks and returns 'DONE' or 'COMPLETE'. */
   function verificationChildrenCheck(id: string): string {
-
     const childrenCheck = dataList.filter((task) => task.mainId === id);
-    const allChecked = childrenCheck.every((task) => task.status === "COMPLETE");
+    const allChecked = childrenCheck.every(
+      (task) => task.status === "COMPLETE"
+    );
 
     if (childrenCheck.length <= 0 || (childrenCheck.length > 0 && allChecked)) {
-      return 'COMPLETE';
-    }
-    else {
-      return 'DONE'
+      return "COMPLETE";
+    } else {
+      return "DONE";
     }
   }
   /**************************************************/
 
-  function verificationMainCheck(mainId: string): string {
-    const mainCheck = dataList.find((task) => task.id === mainId)
+  /*This function checks the status change of the children to update the parent from DONE to COMPLETE or from COMPLETE TO DONE.. */
+  function verificationMainCheck(): void {
+    const parentCheck = dataList.filter((task) => task.id === mainId)[0];
 
-    return 'h'
+    if (parentCheck) {
+      if (
+        status === "COMPLETE" &&
+        parentCheck.status == "DONE" &&
+        verificationChildrenCheck(parentCheck.id) === "COMPLETE"
+      ) {
+        dispatch(
+          updateTask({
+            id: parentCheck.id,
+            status: "COMPLETE",
+          })
+        );
+      } else if (
+        (status === "INPROGRESS" || status === "DONE") &&
+        parentCheck.status == "COMPLETE"
+      ) {
+        dispatch(
+          updateTask({
+            id: parentCheck.id,
+            status: "DONE",
+          })
+        );
+      }
+    }
   }
+  /**************************************************/
+
+  useEffect(() => {
+    verificationMainCheck();
+  }, [status]);
 
   /*this function counts dependencies*/
   function countDependencies(id: string): number {
     const childrenCheck = dataList.filter((task) => task.mainId === id);
-    return childrenCheck.length
+    return childrenCheck.length;
   }
   /************************************************* */
 
@@ -56,25 +93,17 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
     dispatch(
       updateTask({
         id,
-        name,
-        description,
         status: value ? verificationChildrenCheck(id) : "INPROGRESS",
       })
     );
   };
   /************************************************* */
 
-
-
-  
-/*this function is in charge of deleting a task*/
+  /*this function is in charge of deleting a task*/
   const handleDelete = () => {
     dispatch(deleteTask(id));
   };
   /************************************************* */
-
-
-
 
   return (
     <Stack direction="row" ml={`${indent}px`}>
@@ -90,7 +119,6 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
           maxW="150px"
         >
           {id.slice(0, 4)}
-
         </Tag>
       </Box>
 
@@ -98,17 +126,17 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
         px={3}
         flex="1"
         textAlign="left"
-        minWidth={{ base: "250px", md: "450px" }}
+        minWidth={{ base: "200px", md: "450px" }}
         borderBottom="1px BlackAlpha.400"
         display="flex"
         alignItems="center"
-        position='relative'
+        position="relative"
       >
         <Heading size="xs">{name}</Heading>
         <Tag
-          fontSize='12px'
-          position='absolute'
-          right='0'
+          fontSize="12px"
+          position="absolute"
+          right="0"
         >{`Dependencies: ${countDependencies(id)}`}</Tag>
       </Box>
 
@@ -130,6 +158,16 @@ const Task = ({ id, name, description, status, indent }: TaskInterface) => {
           onClick={handleDelete}
           aria-label="Delete task"
           colorScheme="none"
+          _active={{
+            transform: "scale(1.15)",
+          }}
+          icon={<EditIcon color="green.500" />}
+        />
+        <IconButton
+          onClick={handleDelete}
+          aria-label="Delete task"
+          colorScheme="none"
+          width="20px"
           _active={{
             transform: "scale(1.15)",
           }}
